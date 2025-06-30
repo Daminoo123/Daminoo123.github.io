@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{{ page.title | default: site.title }} | Mohamed Amine Ben Aoun</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Font Awesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        /* Import Inter font */
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+
+        /* Custom styles for animations and dark theme */
+        body {
+            font-family: 'Inter', sans-serif;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            color: #E0E7FF; /* Light blue-gray for text */
+            background-color: #0F172A; /* Deeper dark background - Tailwind gray-900 equivalent */
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            scroll-behavior: smooth; /* Smooth scrolling for nav links */
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes slideInUp {
+            from { transform: translateY(30px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        @keyframes scaleIn {
+            from { transform: scale(0.95); opacity: 0; }
+            to { transform: scale(1); opacity: 1; }
+        }
+
+        /* Glitch effect for hero text (not directly used on post page, but kept for consistency) */
+        @keyframes glitch {
+          0% { text-shadow: 0.05em 0 0 #0FF, -0.05em -0.025em 0 #F0F, -0.025em 0.05em 0 #FF0; }
+          15% { text-shadow: -0.05em -0.025em 0 #0FF, 0.025em 0.025em 0 #F0F, -0.05em -0.05em 0 #FF0; }
+          30% { text-shadow: 0.025em 0.05em 0 #0FF, -0.05em -0.05em 0 #F0F, 0.05em 0 0 #FF0; }
+          45% { text-shadow: -0.025em -0.025em 0 #0FF, -0.05em 0 0 #F0F, 0.05em 0.025em 0 #FF0; }
+          60% { text-shadow: 0.05em 0.025em 0 #0FF, 0.025em -0.05em 0 #F0F, -0.05em -0.025em 0 #FF0; }
+          75% { text-shadow: 0.025em 0 0 #0FF, -0.05em 0.05em 0 #F0F, -0.025em -0.025em 0 #FF0; }
+          90% { text-shadow: -0.05em 0.025em 0 #0FF, 0.05em -0.025em 0 #F0F, 0.025em 0 0 #FF0; }
+          100% { text-shadow: none; }
+        }
+
+        .glitch-text {
+            animation: glitch 2s linear infinite alternate;
+        }
+
+        .animate-fade-in {
+            animation: fadeIn 1s ease-out forwards;
+        }
+
+        .animate-slide-in-up {
+            animation: slideInUp 0.8s ease-out forwards;
+            opacity: 0; /* Starts hidden */
+        }
+
+        /* For staggered animations */
+        .animate-slide-in-up-1 { animation-delay: 0.2s; }
+        .animate-slide-in-up-2 { animation-delay: 0.4s; }
+        .animate-slide-in-up-3 { animation-delay: 0.6s; }
+
+        .animate-scale-in {
+            animation: scaleIn 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+            opacity: 0;
+        }
+
+        /* Mobile Nav Icon Animation */
+        #nav-trigger:checked + label .menu-icon {
+            background-color: transparent;
+        }
+
+        #nav-trigger:checked + label .menu-icon::before {
+            transform: rotate(45deg) translate(5px, 6px);
+        }
+
+        #nav-trigger:checked + label .menu-icon::after {
+            transform: rotate(-45deg) translate(5px, -6px);
+        }
+
+        /* Custom scrollbar for a sleek look (optional, browser dependent) */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #1E293B; /* Tailwind gray-800 */
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #334155; /* Tailwind gray-700 */
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #38BDF8; /* A vibrant blue */
+        }
+
+        /* Background grid pattern */
+        .grid-pattern {
+            background-image: linear-gradient(0deg, transparent 24%, rgba(2, 132, 199, 0.05) 25%, rgba(2, 132, 199, 0.05) 26%, transparent 27%, transparent 74%, rgba(2, 132, 199, 0.05) 75%, rgba(2, 132, 199, 0.05) 76%, transparent 77%, transparent), linear-gradient(90deg, transparent 24%, rgba(2, 132, 199, 0.05) 25%, rgba(2, 132, 199, 0.05) 26%, transparent 27%, transparent 74%, rgba(2, 132, 199, 0.05) 75%, rgba(2, 132, 199, 0.05) 76%, transparent 77%, transparent);
+            background-size: 50px 50px;
+            background-repeat: repeat;
+            opacity: 0.3; /* Subtle transparency */
+        }
+
+        /* Code highlight effect */
+        .code-highlight {
+            position: relative;
+            display: inline-block;
+            padding-bottom: 2px;
+        }
+        .code-highlight::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 100%;
+            height: 2px;
+            background-color: #38BDF8; /* Sky blue-400 */
+            transform: scaleX(0);
+            transform-origin: bottom right;
+            transition: transform 0.3s ease-out;
+        }
+        .code-highlight:hover::after {
+            transform: scaleX(1);
+            transform-origin: bottom left;
+        }
+
+        /* Styling for markdown content within posts */
+        .post-content h1, .post-content h2, .post-content h3, .post-content h4, .post-content h5, .post-content h6 {
+            color: #38BDF8; /* Sky blue for headings */
+            margin-top: 1.5em;
+            margin-bottom: 0.5em;
+            font-weight: 700; /* Bold headings */
+            line-height: 1.2;
+        }
+        .post-content h1 { font-size: 2.5rem; }
+        .post-content h2 { font-size: 2rem; }
+        .post-content h3 { font-size: 1.75rem; }
+        .post-content h4 { font-size: 1.5rem; }
+        .post-content h5 { font-size: 1.25rem; }
+        .post-content h6 { font-size: 1rem; }
+
+        .post-content p {
+            margin-bottom: 1em;
+            line-height: 1.7;
+            color: #CBD5E1; /* Slate-300 for paragraph text */
+        }
+
+        .post-content ul, .post-content ol {
+            list-style-position: inside;
+            margin-bottom: 1em;
+            padding-left: 1.5em;
+            color: #CBD5E1; /* Slate-300 */
+        }
+        .post-content ul li { list-style-type: disc; }
+        .post-content ol li { list-style-type: decimal; }
+
+        .post-content a {
+            color: #60A5FA; /* Blue-400 for links */
+            text-decoration: underline;
+        }
+        .post-content a:hover {
+            color: #93C5FD; /* Blue-300 on hover */
+        }
+
+        .post-content strong {
+            color: #60A5FA; /* Blue-400 for strong text */
+        }
+
+        .post-content pre {
+            background-color: #1A202C; /* Dark background for code blocks */
+            color: #A0EEFF; /* Light blue/cyan for code text */
+            padding: 1em;
+            border-radius: 0.5rem;
+            overflow-x: auto;
+            margin-bottom: 1.5em;
+            border: 1px solid #334155; /* Slate-700 border */
+            line-height: 1.4;
+            font-family: 'Cascadia Code', 'Fira Code', 'monospace'; /* Monospace font for code */
+            font-size: 0.9em;
+        }
+
+        .post-content code {
+            background-color: #2D3748; /* Darker background for inline code */
+            color: #A0EEFF; /* Light blue/cyan for inline code text */
+            padding: 0.2em 0.4em;
+            border-radius: 0.3em;
+            font-family: 'Cascadia Code', 'Fira Code', 'monospace';
+            font-size: 0.9em;
+        }
+
+        .post-content blockquote {
+            border-left: 4px solid #38BDF8; /* Sky blue for blockquote border */
+            padding-left: 1em;
+            margin: 1.5em 0;
+            font-style: italic;
+            color: #94A3B8; /* Slate-400 for blockquote text */
+        }
+
+        .post-content img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 0.75rem;
+            margin: 1.5em auto;
+            display: block;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4); /* Dark shadow for images */
+            border: 1px solid rgba(56, 189, 248, 0.3); /* Subtle sky blue border */
+        }
+
+        .post-content table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1.5em 0;
+        }
+        .post-content th, .post-content td {
+            border: 1px solid #475569; /* Slate-600 border */
+            padding: 0.8em;
+            text-align: left;
+            color: #CBD5E1; /* Slate-300 */
+        }
+        .post-content th {
+            background-color: #1E293B; /* Slate-800 for table headers */
+            color: #E2E8F0; /* Slate-200 */
+            font-weight: 600;
+        }
+    </style>
+</head>
+<body class="font-['Inter'] antialiased text-slate-200 bg-slate-900 min-h-screen flex flex-col">
+
+    <!-- Header Section -->
+    <header class="site-header bg-slate-900 bg-opacity-90 backdrop-blur-sm shadow-xl py-4 fixed top-0 w-full z-20 transition-all duration-300">
+        <div class="container mx-auto px-6 flex justify-between items-center">
+            <!-- Site Title/Logo -->
+            <a href="{{ '/' | relative_url }}" class="site-title text-3xl font-extrabold text-sky-400 hover:text-sky-200 transition-colors duration-300 rounded-md p-1 flex items-center">
+                <i class="fas fa-terminal mr-3 text-2xl"></i> M.A.B.A.
+            </a>
+
+            <!-- Mobile Navigation Toggle -->
+            <input type="checkbox" id="nav-trigger" class="hidden peer" aria-label="Toggle navigation">
+            <label for="nav-trigger" class="lg:hidden cursor-pointer p-2 rounded-md hover:bg-gray-800 transition-colors">
+                <span class="menu-icon block w-8 h-0.5 bg-sky-400 relative before:content-[''] before:absolute before:top-[-10px] before:w-8 before:h-0.5 before:bg-sky-400 after:content-[''] after:absolute after:bottom-[-10px] after:w-8 after:h-0.5 after:bg-sky-400 transition-all duration-300"></span>
+            </label>
+
+            <!-- Navigation Menu -->
+            <nav id="site-nav" class="site-nav lg:flex hidden absolute lg:static top-full left-0 w-full lg:w-auto bg-gray-900 lg:bg-transparent shadow-lg lg:shadow-none py-4 lg:py-0 rounded-b-lg lg:rounded-none">
+                <div class="trigger flex flex-col lg:flex-row space-y-3 lg:space-y-0 lg:space-x-8 px-6 lg:px-0">
+                    <a class="nav-link text-gray-200 hover:text-sky-400 font-semibold transition-colors duration-300 py-2 lg:py-0 rounded-md hover:bg-gray-800 lg:hover:bg-transparent px-4" href="{{ '/#about-section' | relative_url }}">About</a>
+                    <a class="nav-link text-gray-200 hover:text-sky-400 font-semibold transition-colors duration-300 py-2 lg:py-0 rounded-md hover:bg-gray-800 lg:hover:bg-transparent px-4" href="{{ '/#skills-section' | relative_url }}">Skills</a>
+                    <a class="nav-link text-gray-200 hover:text-sky-400 font-semibold transition-colors duration-300 py-2 lg:py-0 rounded-md hover:bg-gray-800 lg:hover:bg-transparent px-4" href="{{ '/#posts-section' | relative_url }}">Posts</a>
+                    <a class="nav-link text-gray-200 hover:text-sky-400 font-semibold transition-colors duration-300 py-2 lg:py-0 rounded-md hover:bg-gray-800 lg:hover:bg-transparent px-4" href="{{ '/#contact-section' | relative_url }}">Contact</a>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Main Content Area for the Post -->
+    <main class="page-content flex-grow mt-20 lg:mt-24 py-10">
+        <div class="container mx-auto px-6">
+            <article class="post-article bg-gray-800 p-8 md:p-12 rounded-2xl shadow-xl animate-scale-in border border-sky-600/20 relative overflow-hidden">
+                <div class="absolute inset-0 grid-pattern z-0 opacity-10"></div>
+                <header class="post-header text-center mb-8 relative z-10">
+                    <h1 class="text-5xl font-extrabold text-sky-400 mb-4">{{ page.title | escape }}</h1>
+                    <p class="post-meta text-gray-400 text-lg">
+                        <i class="fas fa-calendar-alt mr-2"></i> Published on {{ page.date | date: "%B %-d, %Y" }}
+                        {% if page.categories %}
+                        <span class="mx-2 text-gray-500">|</span>
+                        <i class="fas fa-folder mr-1"></i>
+                        {% for category in page.categories %}
+                            <a href="{{ '/categories.html' | relative_url }}#{{ category | slugify }}" class="text-sky-400 hover:underline">{{ category }}</a>{% unless forloop.last %}, {% endunless %}
+                        {% endfor %}
+                        {% endif %}
+                        {% if page.tags %}
+                        <span class="mx-2 text-gray-500">|</span>
+                        <i class="fas fa-tags mr-1"></i>
+                        {% for tag in page.tags %}
+                            <a href="{{ '/tags.html' | relative_url }}#{{ tag | slugify }}" class="text-sky-400 hover:underline">{{ tag }}</a>{% unless forloop.last %}, {% endunless %}
+                        {% endfor %}
+                        {% endif %}
+                    </p>
+                </header>
+
+                <section class="post-content relative z-10 prose prose-invert max-w-none">
+                    {{ content }}
+                </section>
+            </article>
+        </div>
+    </main>
+
+    <!-- Footer Section -->
+    <footer id="contact-section" class="site-footer h-card bg-gray-950 text-white py-12 shadow-inner border-t border-gray-800">
+        <div class="container mx-auto px-6">
+            <h2 class="footer-heading text-4xl font-bold mb-8 text-center text-sky-300">
+                <i class="fas fa-hands-helping mr-4 text-3xl"></i> Connect with Mohamed Amine
+            </h2>
+
+            <div class="flex flex-col md:flex-row justify-between items-center text-center md:text-left space-y-8 md:space-y-0">
+                <div class="footer-col md:w-1/3">
+                    <ul class="contact-list text-gray-400 space-y-2">
+                        <li class="text-xl font-semibold mb-2 text-sky-200">Mohamed Amine Ben Aoun</li>
+                        <li>
+                            <a class="text-sky-400 hover:text-sky-200 hover:underline transition-colors duration-300 flex items-center justify-center md:justify-start" href="mailto:Damino.ben.aoun@gmail.com">
+                                <i class="fas fa-envelope mr-2"></i>
+                                Damino.ben.aoun@gmail.com
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="footer-col md:w-1/3 flex justify-center">
+                    <ul class="social-media-list flex space-x-6">
+                        <li>
+                            <a href="https://github.com/Daminoo123" class="text-sky-400 hover:text-sky-200 transition-colors duration-300 transform hover:scale-110" aria-label="GitHub Profile">
+                                <i class="fab fa-github w-9 h-9 text-4xl"></i>
+                                <span class="sr-only">GitHub</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://www.linkedin.com/in/Mohamed+amine+ben+aoun" class="text-sky-400 hover:text-sky-200 transition-colors duration-300 transform hover:scale-110" aria-label="LinkedIn Profile">
+                                <i class="fab fa-linkedin w-9 h-9 text-4xl"></i>
+                                <span class="sr-only">LinkedIn</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="footer-col md:w-1/3 text-gray-400 text-sm md:text-right">
+                    <p class="font-medium text-sky-200 mb-2">Cybersecurity made easy</p>
+                    <p>&copy; <script>document.write(new Date().getFullYear())</script> Mohamed Amine Ben Aoun. All rights reserved.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // JavaScript for mobile navigation toggle
+        document.addEventListener('DOMContentLoaded', () => {
+            const navTrigger = document.getElementById('nav-trigger');
+            const siteNav = document.getElementById('site-nav');
+            const navLinks = siteNav.querySelectorAll('.nav-link');
+
+            // Function to close navigation
+            const closeNav = () => {
+                navTrigger.checked = false;
+                siteNav.classList.add('hidden');
+                siteNav.classList.remove('block');
+            };
+
+            navTrigger.addEventListener('change', () => {
+                if (navTrigger.checked) {
+                    siteNav.classList.remove('hidden');
+                    siteNav.classList.add('block');
+                } else {
+                    siteNav.classList.add('hidden');
+                    siteNav.classList.remove('block');
+                }
+            });
+
+            // Close nav when a link is clicked (for mobile)
+            navLinks.forEach(link => {
+                link.addEventListener('click', closeNav);
+            });
+
+            // Handle window resize to reset nav state for larger screens
+            window.addEventListener('resize', () => {
+                if (window.innerWidth >= 1024) { // Tailwind's 'lg' breakpoint
+                    closeNav();
+                    siteNav.classList.remove('hidden'); // Ensure it's visible on desktop
+                    siteNav.classList.remove('block');
+                }
+            });
+
+            // Intersection Observer for scroll animations (only for sections, not the post article itself)
+            const observerOptions = {
+                root: null,
+                rootMargin: '0px',
+                threshold: 0.1
+            };
+
+            const animateOnScroll = (entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('animate-scale-in');
+                        observer.unobserve(entry.target);
+                    }
+                });
+            };
+
+            // We only need to observe the post article's container, not the elements inside it for this layout
+            const postArticle = document.querySelector('.post-article');
+            if (postArticle) {
+                postArticle.style.opacity = '0'; // Ensure it starts hidden
+                const postObserver = new IntersectionObserver(animateOnScroll, observerOptions);
+                postObserver.observe(postArticle);
+            }
+        });
+    </script>
+</body>
+</html>

@@ -1,236 +1,312 @@
+layout: home
+---
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mohamed Amine Ben Aoun | Cybersecurity Engineer & Researcher</title>
-    
-    <!-- Tailwind CSS -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Mohamed Amine Ben Aoun | CyberSecurity made easy</title>
+    <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
-    
-    <!-- Fonts from Google Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Roboto+Mono:wght@400;700&display=swap" rel="stylesheet">
-    
-    <!-- Feather Icons -->
-    <script src="https://unpkg.com/feather-icons"></script>
-
-    <!-- SEO Meta Tags -->
-    <meta name="description" content="The personal portfolio of Mohamed Amine Ben Aoun, a cybersecurity engineer, ethical hacker, and student. Showcasing projects, skills, and blog write-ups on CTFs, penetration testing, and security research.">
-    <meta name="keywords" content="cybersecurity, ethical hacking, penetration testing, CTF, writeup, portfolio, Mohamed Amine Ben Aoun, security researcher">
-    <meta property="og:title" content="Mohamed Amine Ben Aoun | Cybersecurity Portfolio">
-    <meta property="og:description" content="Cybersecurity engineer and ethical hacker sharing research, tools, and write-ups.">
-    <meta property="og:type" content="website">
-    <meta property="og:url" content="https://your-domain.com/">
-    <meta property="og:image" content="https://placehold.co/1200x630/111827/7ca3ff?text=M.A.+Ben+Aoun">
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="Mohamed Amine Ben Aoun | Cybersecurity Portfolio">
-    <meta name="twitter:description" content="Cybersecurity engineer and ethical hacker sharing research, tools, and write-ups.">
-    <meta name="twitter:image" content="https://placehold.co/1200x630/111827/7ca3ff?text=M.A.+Ben+Aoun">
-
     <style>
-        /* Define custom fonts */
+        /* Import Inter font */
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+
+        /* Custom styles for animations */
+        /* Overall container font */
         body {
             font-family: 'Inter', sans-serif;
-            background-color: #111827; /* bg-gray-900 */
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            color: #374151; /* gray-800 */
+            background-color: #f9fafb; /* gray-50 */
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
         }
-        h1, h2, h3, h4, h5, h6 {
-            font-family: 'Roboto Mono', monospace;
+
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
         }
-        .terminal-glow {
-            box-shadow: 0 0 5px rgba(52, 211, 153, 0.5), 0 0 10px rgba(52, 211, 153, 0.3);
+
+        @keyframes slideUp {
+            from { transform: translateY(20px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        @keyframes fadeInSection {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .animate-fade-in {
+            animation: fadeIn 1s ease-out forwards;
+        }
+
+        .animate-slide-up {
+            animation: slideUp 0.8s ease-out forwards;
+            animation-delay: 0.3s;
+            opacity: 0; /* Ensure it starts hidden */
+        }
+
+        .animate-fade-in-delay {
+            animation: fadeIn 1.2s ease-out forwards;
+            animation-delay: 0.8s;
+            opacity: 0; /* Ensure it starts hidden */
+        }
+
+        .animate-fade-in-section {
+            animation: fadeInSection 1s ease-out forwards;
+            opacity: 0;
+            /* Using JavaScript to trigger these animations on scroll for better effect */
+        }
+
+        /* Mobile Nav Icon Animation */
+        #nav-trigger:checked + label .menu-icon {
+            background-color: transparent;
+        }
+
+        #nav-trigger:checked + label .menu-icon::before {
+            transform: rotate(45deg) translate(5px, 6px);
+        }
+
+        #nav-trigger:checked + label .menu-icon::after {
+            transform: rotate(-45deg) translate(5px, -6px);
         }
     </style>
 </head>
-<body class="bg-gray-900 text-gray-300 antialiased">
+<body class="font-['Inter'] antialiased text-gray-800 bg-gray-50 min-h-screen flex flex-col">
 
-    <!-- Header -->
-    <header class="bg-gray-900/80 backdrop-blur-sm sticky top-0 z-50">
-        <nav class="container mx-auto px-6 py-4">
-            <div class="flex items-center justify-between">
-                <a href="#" class="text-2xl font-bold text-emerald-400">BenAoun.sec</a>
-                <div class="hidden md:flex items-center space-x-8">
-                    <a href="#about" class="text-gray-300 hover:text-emerald-400 transition-colors">About</a>
-                    <a href="#projects" class="text-gray-300 hover:text-emerald-400 transition-colors">Projects</a>
-                    <a href="#blog" class="text-gray-300 hover:text-emerald-400 transition-colors">Blog</a>
-                    <a href="#contact" class="text-gray-300 hover:text-emerald-400 transition-colors">Contact</a>
+    <!-- Header Section -->
+    <header class="site-header bg-white shadow-sm py-4 fixed top-0 w-full z-10">
+        <div class="container mx-auto px-4 flex justify-between items-center">
+            <!-- Site Title/Logo -->
+            <a href="#" class="site-title text-2xl font-bold text-blue-700 hover:text-blue-900 transition-colors duration-300 rounded-md p-1">
+                Mohamed Amine Ben Aoun
+            </a>
+
+            <!-- Mobile Navigation Toggle -->
+            <input type="checkbox" id="nav-trigger" class="hidden peer" aria-label="Toggle navigation">
+            <label for="nav-trigger" class="lg:hidden cursor-pointer">
+                <span class="menu-icon block w-7 h-0.5 bg-gray-700 relative before:content-[''] before:absolute before:top-[-8px] before:w-7 before:h-0.5 before:bg-gray-700 after:content-[''] after:absolute after:bottom-[-8px] after:w-7 after:h-0.5 after:bg-gray-700 transition-all duration-300"></span>
+            </label>
+
+            <!-- Navigation Menu -->
+            <nav id="site-nav" class="site-nav lg:flex hidden absolute lg:static top-full left-0 w-full lg:w-auto bg-white lg:bg-transparent shadow-lg lg:shadow-none py-4 lg:py-0 rounded-b-lg lg:rounded-none">
+                <div class="trigger flex flex-col lg:flex-row space-y-2 lg:space-y-0 lg:space-x-6 px-4 lg:px-0">
+                    <a class="page-link text-gray-700 hover:text-blue-700 font-medium transition-colors duration-300 py-2 lg:py-0 rounded-md hover:bg-gray-100 lg:hover:bg-transparent px-3" href="#about-section">About</a>
+                    <a class="page-link text-gray-700 hover:text-blue-700 font-medium transition-colors duration-300 py-2 lg:py-0 rounded-md hover:bg-gray-100 lg:hover:bg-transparent px-3" href="#posts-section">Posts</a>
+                    <a class="page-link text-gray-700 hover:text-blue-700 font-medium transition-colors duration-300 py-2 lg:py-0 rounded-md hover:bg-gray-100 lg:hover:bg-transparent px-3" href="#contact-section">Contact</a>
                 </div>
-                <div class="md:hidden">
-                    <button id="menu-btn" class="text-gray-300 hover:text-emerald-400 focus:outline-none">
-                        <i data-feather="menu"></i>
-                    </button>
-                </div>
-            </div>
-            <!-- Mobile Menu -->
-            <div id="mobile-menu" class="hidden md:hidden mt-4">
-                <a href="#about" class="block py-2 text-gray-300 hover:text-emerald-400">About</a>
-                <a href="#projects" class="block py-2 text-gray-300 hover:text-emerald-400">Projects</a>
-                <a href="#blog" class="block py-2 text-gray-300 hover:text-emerald-400">Blog</a>
-                <a href="#contact" class="block py-2 text-gray-300 hover:text-emerald-400">Contact</a>
-            </div>
-        </nav>
+            </nav>
+        </div>
     </header>
 
-    <main class="container mx-auto px-6 py-12">
-
-        <!-- Hero Section -->
-        <section class="flex flex-col md:flex-row items-center justify-between py-16 md:py-24">
-            <div class="md:w-2/3 text-center md:text-left">
-                <h1 class="text-4xl md:text-6xl font-bold text-white leading-tight">
+    <!-- Main Content Area -->
+    <main class="page-content flex-grow mt-16 lg:mt-20">
+        <div class="container mx-auto px-4 py-8">
+            <!-- Hero Section -->
+            <section class="hero-section text-center py-20 bg-gradient-to-r from-blue-600 to-indigo-700 text-white rounded-xl shadow-lg mb-12 animate-fade-in">
+                <h1 class="text-5xl md:text-6xl font-extrabold mb-4 animate-slide-up">
                     Mohamed Amine Ben Aoun
                 </h1>
-                <p class="mt-4 text-lg md:text-xl text-emerald-400 font-mono">
-                    &gt; Cybersecurity Engineer & Ethical Hacker
+                <p class="text-xl md:text-2xl font-light opacity-0 animate-fade-in-delay">
+                    Cybersecurity Enthusiast & Developer: <span class="font-semibold">Securing the Digital Frontier</span>
                 </p>
-                <p class="mt-4 max-w-xl text-gray-400">
-                    Passionate about defending digital landscapes. Specializing in penetration testing, vulnerability analysis, and building secure systems. Currently exploring malware analysis and reverse engineering.
+            </section>
+
+            <!-- About Me Section -->
+            <section id="about-section" class="mb-12 bg-white p-8 rounded-xl shadow-md animate-fade-in-section">
+                <h2 class="text-4xl font-bold text-gray-800 mb-6 text-center border-b-2 border-blue-500 pb-2">
+                    About Me
+                </h2>
+                <div class="flex flex-col md:flex-row items-center md:space-x-8">
+                    <div class="md:w-1/3 mb-6 md:mb-0">
+                        <img
+                            src="https://placehold.co/400x400/87CEEB/FFFFFF?text=M.A.B.A" <!-- Placeholder image, consider a professional headshot -->
+                            alt="Mohamed Amine Ben Aoun"
+                            class="rounded-full shadow-lg border-4 border-blue-400 mx-auto w-48 h-48 object-cover"
+                        />
+                    </div>
+                    <div class="md:w-2/3 text-lg text-gray-700 leading-relaxed">
+                        <p class="mb-4">
+                            Hello! I'm Mohamed Amine Ben Aoun, a passionate and dedicated cybersecurity professional committed to exploring the intricacies of digital security and building robust defenses. My journey in cybersecurity is driven by a strong curiosity for how systems work, how they can be exploited, and most importantly, how to protect them.
+                        </p>
+                        <p class="mb-4">
+                            My expertise spans across various domains, including <span class="font-semibold text-blue-600">penetration testing</span>, <span class="font-semibold text-blue-600">web application security</span>, <span class="font-semibold text-blue-600">network security</span>, and <span class="font-semibold text-blue-600">security research</span>. I thrive on challenges, constantly learning new techniques and staying ahead of emerging threats to ensure digital safety.
+                        </p>
+                        <p>
+                            I'm also deeply involved in <span class="font-semibold text-blue-600">Capture The Flag (CTF) competitions</span>, which allow me to sharpen my skills in a practical, hands-on environment, focusing on areas like reverse engineering, exploit development (pwn), and digital forensics. My goal is to make cybersecurity accessible and understandable, contributing to a safer online world.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Skills Section -->
+                <div class="mt-10">
+                    <h3 class="text-3xl font-bold text-gray-800 mb-5 text-center">My Skills</h3>
+                    <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4 text-center">
+                        <div class="bg-blue-100 text-blue-800 py-3 px-4 rounded-full font-medium text-sm shadow-sm hover:bg-blue-200 transition-colors duration-300 transform hover:scale-105">Penetration Testing</div>
+                        <div class="bg-blue-100 text-blue-800 py-3 px-4 rounded-full font-medium text-sm shadow-sm hover:bg-blue-200 transition-colors duration-300 transform hover:scale-105">Web Security</div>
+                        <div class="bg-blue-100 text-blue-800 py-3 px-4 rounded-full font-medium text-sm shadow-sm hover:bg-blue-200 transition-colors duration-300 transform hover:scale-105">Network Security</div>
+                        <div class="bg-blue-100 text-blue-800 py-3 px-4 rounded-full font-medium text-sm shadow-sm hover:bg-blue-200 transition-colors duration-300 transform hover:scale-105">Exploit Development</div>
+                        <div class="bg-blue-100 text-blue-800 py-3 px-4 rounded-full font-medium text-sm shadow-sm hover:bg-blue-200 transition-colors duration-300 transform hover:scale-105">Reverse Engineering</div>
+                        <div class="bg-blue-100 text-blue-800 py-3 px-4 rounded-full font-medium text-sm shadow-sm hover:bg-blue-200 transition-colors duration-300 transform hover:scale-105">Digital Forensics</div>
+                        <div class="bg-blue-100 text-blue-800 py-3 px-4 rounded-full font-medium text-sm shadow-sm hover:bg-blue-200 transition-colors duration-300 transform hover:scale-105">CTF Challenges</div>
+                        <div class="bg-blue-100 text-blue-800 py-3 px-4 rounded-full font-medium text-sm shadow-sm hover:bg-blue-200 transition-colors duration-300 transform hover:scale-105">Linux</div>
+                        <div class="bg-blue-100 text-blue-800 py-3 px-4 rounded-full font-medium text-sm shadow-sm hover:bg-blue-200 transition-colors duration-300 transform hover:scale-105">Python</div>
+                        <div class="bg-blue-100 text-blue-800 py-3 px-4 rounded-full font-medium text-sm shadow-sm hover:bg-blue-200 transition-colors duration-300 transform hover:scale-105">C/C++</div>
+                        <div class="bg-blue-100 text-blue-800 py-3 px-4 rounded-full font-medium text-sm shadow-sm hover:bg-blue-200 transition-colors duration-300 transform hover:scale-105">Vulnerability Assessment</div>
+                        <div class="bg-blue-100 text-blue-800 py-3 px-4 rounded-full font-medium text-sm shadow-sm hover:bg-blue-200 transition-colors duration-300 transform hover:scale-105">Incident Response</div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Posts Section -->
+            <section id="posts-section" class="home mb-12 bg-white p-8 rounded-xl shadow-md animate-fade-in-section">
+                <h2 class="post-list-heading text-4xl font-bold text-gray-800 mb-6 text-center border-b-2 border-blue-500 pb-2">
+                    Recent Posts
+                </h2>
+                <ul class="post-list space-y-6">
+                    <li class="flex flex-col md:flex-row items-start md:items-center bg-gray-50 p-6 rounded-lg shadow-sm hover:shadow-md transition-shadow duration-300 transform hover:scale-[1.01]">
+                        <span class="post-meta text-gray-500 text-sm md:w-1/4 mb-2 md:mb-0">Jun 9, 2025</span>
+                        <div class="md:w-3/4">
+                            <h3 class="text-2xl font-semibold text-blue-700 hover:text-blue-900 transition-colors duration-300">
+                                <a class="post-link" href="/ctf/pwn/exploit/2025/06/09/r0bob1rd-challenge-writeup.html">
+                                    R0bob1rd Challenge Write-Up
+                                </a>
+                            </h3>
+                        </div>
+                    </li>
+                    <li class="flex flex-col md:flex-row items-start md:items-center bg-gray-50 p-6 rounded-lg shadow-sm hover:shadow-md transition-shadow duration-300 transform hover:scale-[1.01]">
+                        <span class="post-meta text-gray-500 text-sm md:w-1/4 mb-2 md:mb-0">Jun 9, 2025</span>
+                        <div class="md:w-3/4">
+                            <h3 class="text-2xl font-semibold text-blue-700 hover:text-blue-900 transition-colors duration-300">
+                                <a class="post-link" href="/jekyll/update/2025/06/09/welcome-to-jekyll.html">
+                                    Welcome to Jekyll!
+                                </a>
+                            </h3>
+                        </div>
+                    </li>
+                </ul>
+
+                <p class="rss-subscribe text-center mt-8 text-gray-600">
+                    Subscribe <a href="/feed.xml" class="text-blue-600 hover:underline">via RSS</a>
                 </p>
-                <div class="mt-8 flex justify-center md:justify-start space-x-4">
-                    <a href="#projects" class="bg-emerald-500 text-white font-bold py-3 px-6 rounded-lg hover:bg-emerald-600 transition-all duration-300">View My Work</a>
-                    <a href="/path/to/your/cv.pdf" download class="bg-gray-700 text-white font-bold py-3 px-6 rounded-lg hover:bg-gray-600 transition-all duration-300">Download CV</a>
-                </div>
-            </div>
-            <div class="mt-12 md:mt-0 md:w-1/3 flex justify-center">
-                 <img src="https://placehold.co/400x400/1a202c/34d399?text=MA" alt="Mohamed Amine Ben Aoun Avatar" class="rounded-full border-4 border-gray-700 shadow-lg terminal-glow w-64 h-64 md:w-80 md:h-80 object-cover">
-            </div>
-        </section>
-
-        <!-- About Me Section -->
-        <section id="about" class="py-16">
-            <h2 class="text-3xl font-bold text-center text-white mb-12">About Me</h2>
-            <div class="grid grid-cols-1 md:grid-cols-5 gap-12 items-center">
-                <div class="md:col-span-3 text-gray-400 space-y-4">
-                    <p>Hello! I'm Amine, a cybersecurity enthusiast from Tunisia with a deep-rooted passion for understanding and mitigating digital threats. My journey started with a simple curiosity for how things work, which quickly evolved into a fascination with network security and ethical hacking.</p>
-                    <p>I thrive in challenging environments and enjoy participating in Capture The Flag (CTF) competitions, where I sharpen my skills in cryptography, forensics, and binary exploitation. I am a firm believer in the power of open-source and contribute to security tools whenever possible.</p>
-                    <p>My goal is to leverage my skills to build more resilient and secure digital infrastructures. When I'm not in front of a terminal, I enjoy reading sci-fi novels and exploring the beautiful landscapes of my country.</p>
-                </div>
-                <div class="md:col-span-2 bg-gray-800 p-6 rounded-lg border border-gray-700">
-                    <h3 class="text-xl font-bold text-white mb-4">Core Skills</h3>
-                    <ul class="space-y-3">
-                        <li class="flex items-center"><i data-feather="shield" class="w-5 h-5 mr-3 text-emerald-400"></i> Penetration Testing</li>
-                        <li class="flex items-center"><i data-feather="search" class="w-5 h-5 mr-3 text-emerald-400"></i> Vulnerability Assessment</li>
-                        <li class="flex items-center"><i data-feather="code" class="w-5 h-5 mr-3 text-emerald-400"></i> Secure Code Review</li>
-                        <li class="flex items-center"><i data-feather="git-pull-request" class="w-5 h-5 mr-3 text-emerald-400"></i> Reverse Engineering</li>
-                        <li class="flex items-center"><i data-feather="server" class="w-5 h-5 mr-3 text-emerald-400"></i> Network Security</li>
-                    </ul>
-                </div>
-            </div>
-        </section>
-
-        <!-- Projects Section -->
-        <section id="projects" class="py-16">
-            <h2 class="text-3xl font-bold text-center text-white mb-12">Featured Projects</h2>
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                <!-- Project Card 1 -->
-                <div class="bg-gray-800 border border-gray-700 rounded-lg p-6 flex flex-col hover:border-emerald-500 transition-colors">
-                    <h3 class="text-xl font-bold text-white">PhishGuard</h3>
-                    <p class="text-gray-400 mt-2 flex-grow">A browser extension that uses machine learning to detect and block phishing websites in real-time by analyzing URL and page content features.</p>
-                    <div class="mt-4">
-                        <span class="inline-block bg-emerald-900 text-emerald-300 text-xs font-semibold mr-2 px-2.5 py-0.5 rounded">Python</span>
-                        <span class="inline-block bg-emerald-900 text-emerald-300 text-xs font-semibold mr-2 px-2.5 py-0.5 rounded">JavaScript</span>
-                        <span class="inline-block bg-emerald-900 text-emerald-300 text-xs font-semibold mr-2 px-2.5 py-0.5 rounded">TensorFlow</span>
-                    </div>
-                    <a href="https://github.com/your-username/phishguard" target="_blank" class="text-emerald-400 mt-4 inline-flex items-center">View on GitHub <i data-feather="arrow-right" class="w-4 h-4 ml-2"></i></a>
-                </div>
-                <!-- Project Card 2 -->
-                <div class="bg-gray-800 border border-gray-700 rounded-lg p-6 flex flex-col hover:border-emerald-500 transition-colors">
-                    <h3 class="text-xl font-bold text-white">Log Anomaly Detector</h3>
-                    <p class="text-gray-400 mt-2 flex-grow">A system that parses server logs and uses statistical analysis and anomaly detection algorithms to identify potential security breaches or system failures.</p>
-                    <div class="mt-4">
-                        <span class="inline-block bg-emerald-900 text-emerald-300 text-xs font-semibold mr-2 px-2.5 py-0.5 rounded">Go</span>
-                        <span class="inline-block bg-emerald-900 text-emerald-300 text-xs font-semibold mr-2 px-2.5 py-0.5 rounded">ELK Stack</span>
-                        <span class="inline-block bg-emerald-900 text-emerald-300 text-xs font-semibold mr-2 px-2.5 py-0.5 rounded">Docker</span>
-                    </div>
-                    <a href="https://github.com/your-username/log-anomaly-detector" target="_blank" class="text-emerald-400 mt-4 inline-flex items-center">View on GitHub <i data-feather="arrow-right" class="w-4 h-4 ml-2"></i></a>
-                </div>
-                <!-- Project Card 3 -->
-                <div class="bg-gray-800 border border-gray-700 rounded-lg p-6 flex flex-col hover:border-emerald-500 transition-colors">
-                    <h3 class="text-xl font-bold text-white">CTF Challenge Toolkit</h3>
-                    <p class="text-gray-400 mt-2 flex-grow">A collection of custom scripts and tools designed to automate common tasks in CTF competitions, including crypto solvers and steganography decoders.</p>
-                    <div class="mt-4">
-                        <span class="inline-block bg-emerald-900 text-emerald-300 text-xs font-semibold mr-2 px-2.5 py-0.5 rounded">Python</span>
-                        <span class="inline-block bg-emerald-900 text-emerald-300 text-xs font-semibold mr-2 px-2.5 py-0.5 rounded">Bash</span>
-                    </div>
-                    <a href="https://github.com/your-username/ctf-toolkit" target="_blank" class="text-emerald-400 mt-4 inline-flex items-center">View on GitHub <i data-feather="arrow-right" class="w-4 h-4 ml-2"></i></a>
-                </div>
-            </div>
-        </section>
-
-        <!-- Blog Section -->
-        <section id="blog" class="py-16">
-            <h2 class="text-3xl font-bold text-center text-white mb-12">Latest Posts</h2>
-            <div class="space-y-8 max-w-4xl mx-auto">
-                <!-- Blog Post 1 -->
-                <div class="bg-gray-800/50 p-6 rounded-lg group">
-                    <p class="text-sm text-gray-500">June 9, 2025</p>
-                    <h3 class="text-2xl font-bold mt-2">
-                        <a href="#" class="text-white group-hover:text-emerald-400 transition-colors">R0bob1rd Challenge Write-Up</a>
-                    </h3>
-                    <p class="text-gray-400 mt-3">A detailed walkthrough of the 'R0bob1rd' pwn challenge from HackTheBox. This post covers the vulnerability analysis, exploit development, and lessons learned from a tricky buffer overflow.</p>
-                    <a href="#" class="text-emerald-400 mt-4 inline-block font-semibold">Read More &rarr;</a>
-                </div>
-                 <!-- Blog Post 2 -->
-                 <div class="bg-gray-800/50 p-6 rounded-lg group">
-                    <p class="text-sm text-gray-500">May 21, 2025</p>
-                    <h3 class="text-2xl font-bold mt-2">
-                        <a href="#" class="text-white group-hover:text-emerald-400 transition-colors">Analyzing a Simple Keylogger with Ghidra</a>
-                    </h3>
-                    <p class="text-gray-400 mt-3">An introductory guide to reverse engineering malware using Ghidra. We'll deconstruct a basic keylogger to understand its functionality and identify its command and control mechanism.</p>
-                    <a href="#" class="text-emerald-400 mt-4 inline-block font-semibold">Read More &rarr;</a>
-                </div>
-            </div>
-        </section>
-        
-        <!-- Contact Section -->
-        <section id="contact" class="py-16 text-center">
-             <h2 class="text-3xl font-bold text-white mb-4">Get In Touch</h2>
-             <p class="text-gray-400 max-w-2xl mx-auto mb-8">I'm always open to discussing new projects, creative ideas, or opportunities to be part of an ambitious vision. Feel free to reach out.</p>
-             <a href="mailto:damino.ben.aoun@gmail.com" class="bg-emerald-500 text-white font-bold py-3 px-8 rounded-lg hover:bg-emerald-600 transition-all duration-300 text-lg">
-                Say Hello
-             </a>
-        </section>
-
+            </section>
+        </div>
     </main>
 
-    <!-- Footer -->
-    <footer class="bg-gray-900 border-t border-gray-800">
-        <div class="container mx-auto px-6 py-8">
-            <div class="flex flex-col md:flex-row items-center justify-between">
-                <div class="text-center md:text-left mb-4 md:mb-0">
-                    <p class="text-white">&copy; 2025 Mohamed Amine Ben Aoun. All Rights Reserved.</p>
-                    <p class="text-sm text-gray-500">Built with <span class="text-red-500">&hearts;</span> and Tailwind CSS</p>
+    <!-- Footer Section -->
+    <footer id="contact-section" class="site-footer h-card bg-gray-900 text-white py-8 mt-12 shadow-inner">
+        <div class="container mx-auto px-4">
+            <h2 class="footer-heading text-3xl font-bold mb-6 text-center text-blue-300">
+                Mohamed Amine Ben Aoun
+            </h2>
+
+            <div class="flex flex-col md:flex-row justify-between items-center text-center md:text-left space-y-6 md:space-y-0">
+                <div class="footer-col footer-col-1 md:w-1/3">
+                    <ul class="contact-list text-gray-300">
+                        <li class="p-name text-lg font-semibold mb-1">Mohamed Amine Ben Aoun</li>
+                        <li>
+                            <a class="u-email text-blue-400 hover:underline" href="mailto:Damino.ben.aoun@gmail.com">
+                                Damino.ben.aoun@gmail.com
+                            </a>
+                        </li>
+                    </ul>
                 </div>
-                <div class="flex items-center space-x-6">
-                    <a href="https://github.com/your-username" target="_blank" class="text-gray-400 hover:text-white transition-colors"><i data-feather="github"></i></a>
-                    <a href="https://linkedin.com/in/your-username" target="_blank" class="text-gray-400 hover:text-white transition-colors"><i data-feather="linkedin"></i></a>
-                    <a href="https://twitter.com/your-username" target="_blank" class="text-gray-400 hover:text-white transition-colors"><i data-feather="twitter"></i></a>
-                    <a href="mailto:damino.ben.aoun@gmail.com" class="text-gray-400 hover:text-white transition-colors"><i data-feather="mail"></i></a>
-                     <a href="tel:+21653227170" class="text-gray-400 hover:text-white transition-colors"><i data-feather="phone"></i></a>
+
+                <div class="footer-col footer-col-2 md:w-1/3">
+                    <ul class="social-media-list flex justify-center md:justify-end space-x-4">
+                        <li>
+                            <a href="https://github.com/Daminoo123" class="text-blue-400 hover:text-blue-200 transition-colors duration-300" aria-label="GitHub Profile">
+                                <svg class="svg-icon w-7 h-7 fill-current" viewBox="0 0 24 24" aria-hidden="true">
+                                    <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387 0.599 0.111 0.793-0.261 0.793-0.577v-2.234c-3.338 0.726-4.033-1.416-4.033-1.416-0.546-1.387-1.333-1.756-1.333-1.756-1.089-0.745 0.083-0.729 0.083-0.729 1.205 0.084 1.839 1.237 1.839 1.237 1.07 1.835 2.809 1.305 3.493 0.998 0.108-0.776 0.418-1.305 0.762-1.604-2.665-0.305-5.467-1.334-5.467-5.931 0-1.311 0.469-2.381 1.236-3.221-0.124-0.303-0.535-1.524 0.118-3.176 0 0 1.008-0.322 3.301 1.23 0.957-0.266 1.986-0.399 3.006-0.399 1.02 0 2.049 0.133 3.006 0.399 2.291-1.552 3.297-1.23 3.297-1.23 0.653 1.653 0.242 2.874 0.118 3.176 0.77 0.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.923 0.43 0.372 0.823 1.102 0.823 2.222v3.293c0 0.319 0.192 0.694 0.801 0.576 4.765-1.589 8.196-6.096 8.196-11.385 0-6.627-5.373-12-12-12z" />
+                                </svg>
+                                <span class="sr-only">GitHub</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://www.linkedin.com/in/Mohamed+amine+ben+aoun" class="text-blue-400 hover:text-blue-200 transition-colors duration-300" aria-label="LinkedIn Profile">
+                                <svg class="svg-icon w-7 h-7 fill-current" viewBox="0 0 24 24" aria-hidden="true">
+                                    <path d="M20.447 20.452h-3.554v-5.569c0-1.341-0.67-1.635-1.897-1.635s-2.474 0.145-2.474 1.635v5.569h-3.554s0.046-9.18 0-10.138h3.554v1.723c0-0.002 0.003-0.004 0.003-0.006c0.518-0.857 1.458-1.896 3.288-1.896c4.27 0 5.178 2.923 5.178 7.152l-0.005 0.006zM7.943 9.408c-1.396 0-2.28 1.159-2.28 2.649c0 1.493 0.908 2.648 2.247 2.648h0.02c1.45 0 2.282-1.156 2.282-2.649c-0.002-1.488-0.89-2.649-2.279-2.649zM5.992 5.373c-1.077 0-1.859 0.778-1.859 1.769c0 0.99 0.778 1.77 1.848 1.77h0.012c1.072 0 1.857-0.776 1.857-1.769c0-0.991-0.778-1.77-1.838-1.77zM20.447 0h-16.892c-1.917 0-3.475 1.556-3.475 3.472v17.051c0 1.916 1.558 3.472 3.475 3.472h16.892c1.916 0 3.473-1.556 3.473-3.472v-17.051c0-1.916-1.557-3.472-3.473-3.472z" />
+                                </svg>
+                                <span class="sr-only">LinkedIn</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="footer-col footer-col-3 md:w-1/3 text-gray-400">
+                    <p>CyberSecurity made easy</p>
                 </div>
             </div>
         </div>
     </footer>
 
     <script>
-        // Feather Icons
-        feather.replace();
+        // JavaScript for mobile navigation toggle
+        document.addEventListener('DOMContentLoaded', () => {
+            const navTrigger = document.getElementById('nav-trigger');
+            const siteNav = document.getElementById('site-nav');
+            const navLinks = siteNav.querySelectorAll('.page-link');
 
-        // Mobile Menu Toggle
-        const menuBtn = document.getElementById('menu-btn');
-        const mobileMenu = document.getElementById('mobile-menu');
+            // Function to close navigation
+            const closeNav = () => {
+                navTrigger.checked = false;
+                siteNav.classList.add('hidden');
+                siteNav.classList.remove('block');
+            };
 
-        menuBtn.addEventListener('click', () => {
-            mobileMenu.classList.toggle('hidden');
-        });
-        
-        // Close mobile menu when a link is clicked
-        const mobileMenuLinks = mobileMenu.getElementsByTagName('a');
-        for (const link of mobileMenuLinks) {
-            link.addEventListener('click', () => {
-                 mobileMenu.classList.add('hidden');
+            navTrigger.addEventListener('change', () => {
+                if (navTrigger.checked) {
+                    siteNav.classList.remove('hidden');
+                    siteNav.classList.add('block');
+                } else {
+                    siteNav.classList.add('hidden');
+                    siteNav.classList.remove('block');
+                }
             });
-        }
+
+            // Close nav when a link is clicked (for mobile)
+            navLinks.forEach(link => {
+                link.addEventListener('click', closeNav);
+            });
+
+            // Handle window resize to reset nav state for larger screens
+            window.addEventListener('resize', () => {
+                if (window.innerWidth >= 1024) { // Tailwind's 'lg' breakpoint
+                    closeNav();
+                    siteNav.classList.remove('hidden'); // Ensure it's visible on desktop
+                    siteNav.classList.remove('block');
+                }
+            });
+
+            // Intersection Observer for scroll animations
+            const observerOptions = {
+                root: null,
+                rootMargin: '0px',
+                threshold: 0.1
+            };
+
+            const animateOnScroll = (entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('animate-fade-in-section');
+                        observer.unobserve(entry.target);
+                    }
+                });
+            };
+
+            const sectionsToAnimate = document.querySelectorAll('.animate-fade-in-section');
+            const observer = new IntersectionObserver(animateOnScroll, observerOptions);
+
+            sectionsToAnimate.forEach(section => {
+                observer.observe(section);
+            });
+        });
     </script>
 </body>
 </html>
