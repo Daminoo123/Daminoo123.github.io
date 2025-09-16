@@ -3,6 +3,7 @@ layout: post
 title:  "R0bob1rd Challenge Write-Up"
 date:   2025-06-09 14:45:00 -0500
 categories: ctf pwn exploit
+permalink: /certifications/2025/06/16/CRTP-REVIEW/
 ---
 
 This document details the process of exploiting the `r0bob1rd` binary to achieve a remote shell. The exploit leverages an Out-of-Bounds read to leak a `libc` address, followed by a Format String Bug to hijack the `__stack_chk_fail` function, ultimately triggering a `one_gadget` for code execution.
