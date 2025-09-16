@@ -62,7 +62,7 @@ Here are some tips that helped me throughout:
 
 - Restart lab machines if necessary, as occasional misconfigurations may occur  
 - Keep notes handy — they will save a lot of time during the exam 
-- Capture evidence continuously for the report take as many screen shots as you can you wont regret it and they are free after all 
+- Capture evidence continuously for the report take as many screen shots as you can ,you wont regret it and they are free after all 
 
 - Keep thorough notes from your preparation  
 - Restart machines if something seems off  
