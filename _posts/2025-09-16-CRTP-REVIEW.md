@@ -8,6 +8,7 @@ permalink: /certifications/2025/06/16/CRTP-REVIEW/
 
 Hi, I’m **Mohamed Amine Ben Aoun** a Network infrastructure and data security engineering student at ESPRIT.  
 Recently, I had the incredible opportunity to take the **Certified Red Team Professional (CRTP)** exam, which I earned through a giveaway. In this post, I’ll share my experience with the course, lab environment, exam, and a few tips for anyone planning to pursue this certification.
+![CRTP Certificate]({{ '/imgs/CRTP/image.png' | relative_url }})
 ## What is CRTP?
 
 The **CRTP** is a hands-on certification designed for those looking to deepen their skills in Active Directory security and red teaming. Unlike theory-heavy exams, CRTP requires you to work in a realistic Windows lab setup with multiple domains and Server 2022+ machines. Your goal is to navigate, exploit, and analyze the network — all within a limited timeframe — and submit a full report documenting your steps.
