@@ -76,6 +76,4 @@ Here are some tips that helped me throughout:
 I found the CRTP to be an exceptional learning experience that perfectly balances practical challenges with comprehensive education. The course material is incredibly hands-on, the lab environment remains remarkably stable throughout the training period, and the support team responds with impressive speed and expertise. This certification serves as an outstanding gateway into Active Directory security and real-world red teaming operations. Having the opportunity to access this valuable training through their giveaway program added an extra layer of gratitude to the entire journey.
 
 Next on my path is the **Certified Red Team Expert (CRTE)**, and I’m looking forward to sharing that journey as well.
-
-Stay tuned for more posts on Active Directory security and red teaming! 🚀
 ![CRTP Certificate]({{ '/imgs/CRTP/Certificate.png' | relative_url }})
