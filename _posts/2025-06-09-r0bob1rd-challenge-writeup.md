@@ -2,7 +2,6 @@
 layout: post
 title:  "R0bob1rd Challenge Write-Up"
 date:   2025-06-09 14:45:00 -0500
-categories: ctf pwn exploit
 permalink: /ct/2025/06/16/robobird/
 ---
 
