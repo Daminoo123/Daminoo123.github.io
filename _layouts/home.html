@@ -1,280 +1,325 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Mohamed Amine Ben Aoun | Cybersecurity Professional</title>
-    <!-- Tailwind CSS CDN -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Font Awesome for Icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <style>
-        /* Import Inter font */
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
 
-        /* Custom styles for animations and dark theme */
+<html lang="en" class="scroll-smooth">
+
+<head>
+
+    <meta charset="utf-8">
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Mohamed Amine Ben Aoun | Cybersecurity Engineering student</title>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+    <style>
+
+        /* General body styling */
+
         body {
+
             font-family: 'Inter', sans-serif;
-            -webkit-font-smoothing: antialiased;
-            -moz-osx-font-smoothing: grayscale;
-            color: #E0E7FF; /* Light blue-gray for text */
-            background-color: #0F172A; /* Deeper dark background - Tailwind gray-900 equivalent */
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            scroll-behavior: smooth; /* Smooth scrolling for nav links */
+
+            background-color: #0F172A;
+
+            color: #F8FAFC;
+
         }
 
-        /* Animations */
+
+
+        /* Hero section animations */
+
         @keyframes fadeIn {
+
             from { opacity: 0; }
+
             to { opacity: 1; }
+
+        }
+
+        .animate-fadeIn {
+
+            animation: fadeIn 1s ease-out forwards;
+
         }
 
         @keyframes slideInUp {
-            from { transform: translateY(30px); opacity: 0; }
+
+            from { transform: translateY(20px); opacity: 0; }
+
             to { transform: translateY(0); opacity: 1; }
+
         }
 
-        @keyframes scaleIn {
-            from { transform: scale(0.95); opacity: 0; }
-            to { transform: scale(1); opacity: 1; }
+        .animate-slideInUp {
+
+            animation: slideInUp 0.6s ease-out forwards;
+
         }
 
-        /* Glitch effect for hero text */
-        @keyframes glitch {
-          0% { text-shadow: 0.05em 0 0 #0FF, -0.05em -0.025em 0 #F0F, -0.025em 0.05em 0 #FF0; }
-          15% { text-shadow: -0.05em -0.025em 0 #0FF, 0.025em 0.025em 0 #F0F, -0.05em -0.05em 0 #FF0; }
-          30% { text-shadow: 0.025em 0.05em 0 #0FF, -0.05em -0.05em 0 #F0F, 0.05em 0 0 #FF0; }
-          45% { text-shadow: -0.025em -0.025em 0 #0FF, -0.05em 0 0 #F0F, 0.05em 0.025em 0 #FF0; }
-          60% { text-shadow: 0.05em 0.025em 0 #0FF, 0.025em -0.05em 0 #F0F, -0.05em -0.025em 0 #FF0; }
-          75% { text-shadow: 0.025em 0 0 #0FF, -0.05em 0.05em 0 #F0F, -0.025em -0.025em 0 #FF0; }
-          90% { text-shadow: -0.05em 0.025em 0 #0FF, 0.05em -0.025em 0 #F0F, 0.025em 0 0 #FF0; }
-          100% { text-shadow: none; }
-        }
 
-        .glitch-text {
-            animation: glitch 2s linear infinite alternate;
-        }
 
-        .animate-fade-in {
-            animation: fadeIn 1s ease-out forwards;
-        }
+        /* Section animations */
 
-        .animate-slide-in-up {
-            animation: slideInUp 0.8s ease-out forwards;
-            opacity: 0; /* Starts hidden */
-        }
+        .animate-popIn {
 
-        /* For staggered animations */
-        .animate-slide-in-up-1 { animation-delay: 0.2s; }
-        .animate-slide-in-up-2 { animation-delay: 0.4s; }
-        .animate-slide-in-up-3 { animation-delay: 0.6s; }
+            animation: popIn 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
 
-        .animate-scale-in {
-            animation: scaleIn 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
             opacity: 0;
+
         }
 
-        /* Mobile Nav Icon Animation */
-        #nav-trigger:checked + label .menu-icon {
-            background-color: transparent;
+        @keyframes popIn {
+
+            from { transform: scale(0.95); opacity: 0; }
+
+            to { transform: scale(1); opacity: 1; }
+
         }
 
-        #nav-trigger:checked + label .menu-icon::before {
-            transform: rotate(45deg) translate(5px, 6px);
+
+
+        /* Responsive navigation */
+
+        #nav-trigger:checked ~ #site-nav {
+
+            display: block;
+
         }
 
-        #nav-trigger:checked + label .menu-icon::after {
-            transform: rotate(-45deg) translate(5px, -6px);
+        @media (min-width: 1024px) {
+
+            #nav-trigger:checked ~ #site-nav {
+
+                display: flex;
+
+            }
+
         }
 
-        /* Custom scrollbar for a sleek look (optional, browser dependent) */
-        ::-webkit-scrollbar {
-            width: 8px;
-        }
-        ::-webkit-scrollbar-track {
-            background: #1E293B; /* Tailwind gray-800 */
-        }
-        ::-webkit-scrollbar-thumb {
-            background: #334155; /* Tailwind gray-700 */
-            border-radius: 4px;
-        }
-        ::-webkit-scrollbar-thumb:hover {
-            background: #38BDF8; /* A vibrant blue */
-        }
-
-        /* Background grid pattern */
-        .grid-pattern {
-            background-image: linear-gradient(0deg, transparent 24%, rgba(2, 132, 199, 0.05) 25%, rgba(2, 132, 199, 0.05) 26%, transparent 27%, transparent 74%, rgba(2, 132, 199, 0.05) 75%, rgba(2, 132, 199, 0.05) 76%, transparent 77%, transparent), linear-gradient(90deg, transparent 24%, rgba(2, 132, 199, 0.05) 25%, rgba(2, 132, 199, 0.05) 26%, transparent 27%, transparent 74%, rgba(2, 132, 199, 0.05) 75%, rgba(2, 132, 199, 0.05) 76%, transparent 77%, transparent);
-            background-size: 50px 50px;
-            background-repeat: repeat;
-            opacity: 0.3; /* Subtle transparency */
-        }
-
-        /* Code highlight effect */
-        .code-highlight {
-            position: relative;
-            display: inline-block;
-            padding-bottom: 2px;
-        }
-        .code-highlight::after {
-            content: '';
-            position: absolute;
-            left: 0;
-            bottom: 0;
-            width: 100%;
-            height: 2px;
-            background-color: #38BDF8; /* Sky blue-400 */
-            transform: scaleX(0);
-            transform-origin: bottom right;
-            transition: transform 0.3s ease-out;
-        }
-        .code-highlight:hover::after {
-            transform: scaleX(1);
-            transform-origin: bottom left;
-        }
     </style>
-</head>
-<body class="font-['Inter'] antialiased text-blue-50 bg-gray-900 min-h-screen flex flex-col">
 
-    <!-- Header Section -->
-    <header class="site-header bg-gray-900 bg-opacity-90 backdrop-blur-sm shadow-xl py-4 fixed top-0 w-full z-20 transition-all duration-300">
-        <div class="container mx-auto px-6 flex justify-between items-center">
-            <!-- Site Title/Logo -->
-            <a href="#" class="site-title text-3xl font-extrabold text-sky-400 hover:text-sky-200 transition-colors duration-300 rounded-md p-1 flex items-center">
-                <i class="fas fa-terminal mr-3 text-2xl"></i> Damino
+</head>
+
+<body class="antialiased font-['Inter']">
+
+
+
+    <header class="bg-slate-900/80 backdrop-blur-md shadow-xl fixed top-0 w-full z-20">
+
+        <div class="container mx-auto px-4 py-4 flex justify-between items-center">
+
+            <a href="#" class="text-3xl font-extrabold text-sky-400">
+
+                <i class="fas fa-terminal mr-2"></i> Mohamed Amine
+
             </a>
 
-            <!-- Mobile Navigation Toggle -->
+            
+
             <input type="checkbox" id="nav-trigger" class="hidden peer" aria-label="Toggle navigation">
-            <label for="nav-trigger" class="lg:hidden cursor-pointer p-2 rounded-md hover:bg-gray-800 transition-colors">
-                <span class="menu-icon block w-8 h-0.5 bg-sky-400 relative before:content-[''] before:absolute before:top-[-10px] before:w-8 before:h-0.5 before:bg-sky-400 after:content-[''] after:absolute after:bottom-[-10px] after:w-8 after:h-0.5 after:bg-sky-400 transition-all duration-300"></span>
+
+            <label for="nav-trigger" class="lg:hidden cursor-pointer">
+
+                <span class="block w-8 h-0.5 bg-sky-400 relative before:content-[''] before:absolute before:top-[-8px] before:w-8 before:h-0.5 before:bg-sky-400 after:content-[''] after:absolute after:bottom-[-8px] after:w-8 after:h-0.5 after:bg-sky-400 transition-all duration-300 peer-checked:bg-transparent peer-checked:before:rotate-45 peer-checked:before:translate-y-2 peer-checked:after:-rotate-45 peer-checked:after:-translate-y-2"></span>
+
             </label>
 
-            <!-- Navigation Menu -->
-            <nav id="site-nav" class="site-nav lg:flex hidden absolute lg:static top-full left-0 w-full lg:w-auto bg-gray-900 lg:bg-transparent shadow-lg lg:shadow-none py-4 lg:py-0 rounded-b-lg lg:rounded-none">
-                <div class="trigger flex flex-col lg:flex-row space-y-3 lg:space-y-0 lg:space-x-8 px-6 lg:px-0">
-                    <a class="nav-link text-gray-200 hover:text-sky-400 font-semibold transition-colors duration-300 py-2 lg:py-0 rounded-md hover:bg-gray-800 lg:hover:bg-transparent px-4" href="#about-section">About</a>
-                    <a class="nav-link text-gray-200 hover:text-sky-400 font-semibold transition-colors duration-300 py-2 lg:py-0 rounded-md hover:bg-gray-800 lg:hover:bg-transparent px-4" href="#skills-section">Skills</a>
-                    <a class="nav-link text-gray-200 hover:text-sky-400 font-semibold transition-colors duration-300 py-2 lg:py-0 rounded-md hover:bg-gray-800 lg:hover:bg-transparent px-4" href="#posts-section">Posts</a>
-                    <a class="nav-link text-gray-200 hover:text-sky-400 font-semibold transition-colors duration-300 py-2 lg:py-0 rounded-md hover:bg-gray-800 lg:hover:bg-transparent px-4" href="#contact-section">Contact</a>
-                </div>
+
+
+            <nav id="site-nav" class="hidden lg:flex flex-col lg:flex-row absolute lg:static top-16 left-0 w-full lg:w-auto bg-slate-900 lg:bg-transparent shadow-lg lg:shadow-none py-4 lg:py-0 rounded-b-lg">
+
+                <a class="nav-link text-gray-300 hover:text-sky-400 font-semibold px-4 py-2 lg:py-0 transition-colors" href="#about">About Me</a>
+
+                <a class="nav-link text-gray-300 hover:text-sky-400 font-semibold px-4 py-2 lg:py-0 lg:ml-6 transition-colors" href="#skills">Skills</a>
+
+                <a class="nav-link text-gray-300 hover:text-sky-400 font-semibold px-4 py-2 lg:py-0 lg:ml-6 transition-colors" href="#categories">Categories</a>
+
+                <a class="nav-link text-gray-300 hover:text-sky-400 font-semibold px-4 py-2 lg:py-0 lg:ml-6 transition-colors" href="#blog">Blog</a>
+
+                <a class="nav-link text-gray-300 hover:text-sky-400 font-semibold px-4 py-2 lg:py-0 lg:ml-6 transition-colors" href="#contact">Contact</a>
+
             </nav>
+
         </div>
+
     </header>
 
-    <!-- Main Content Area -->
-    <main class="page-content flex-grow mt-20 lg:mt-24">
-        <div class="container mx-auto px-6 py-10">
 
-            <!-- Hero Section -->
-            <section class="hero-section text-center py-24 bg-gradient-to-br from-gray-800 to-gray-950 text-white rounded-2xl shadow-2xl mb-16 animate-fade-in border border-sky-600/30 overflow-hidden relative">
-                <div class="absolute inset-0 grid-pattern z-0"></div>
-                <div class="absolute inset-0 bg-gradient-to-r from-sky-900/10 to-transparent pointer-events-none z-0"></div>
-                <div class="relative z-10">
-                    <h1 class="text-6xl md:text-7xl font-extrabold mb-6 tracking-tight text-sky-400 animate-slide-in-up animate-slide-in-up-1 glitch-text">
-                        Mohamed Amine Ben Aoun
-                    </h1>
-                    <p class="text-2xl md:text-3xl font-light text-gray-300 mb-8 animate-slide-in-up animate-slide-in-up-2">
-                        Cybersecurity Professional
-                        <span class="block mt-2 font-medium text-sky-300">
-                            Binary Exploitation & Reverse Engineering Enthusiast
-                        </span>
-                    </p>
-                    <a href="#about-section" class="inline-block bg-sky-600 hover:bg-sky-700 text-white font-bold py-3 px-8 rounded-full shadow-lg transition-all duration-300 transform hover:scale-105 focus:outline-none focus:ring-4 focus:ring-sky-500 focus:ring-opacity-50 animate-slide-in-up animate-slide-in-up-3">
-                        Explore My Work <i class="fas fa-arrow-right ml-2"></i>
-                    </a>
-                </div>
+
+    <main class="page-content flex-grow mt-24 md:mt-28">
+
+        <div class="container mx-auto px-4 py-8">
+
+
+
+            <section class="text-center py-20 md:py-28 bg-slate-800 rounded-2xl shadow-2xl animate-fadeIn">
+
+                <h1 class="text-5xl md:text-7xl font-extrabold text-white mb-4 animate-slideInUp" style="animation-delay: 0.2s;">
+
+                    Mohamed Amine Ben Aoun
+
+                </h1>
+
+                <p class="text-2xl md:text-3xl font-light text-gray-400 mb-8 animate-slideInUp" style="animation-delay: 0.4s;">
+
+                    Cybersecurity Engineering student & <span class="text-sky-400">passionate about both Defensive and Offensive Security </span>
+
+                </p>
+
+                <a href="#about" class="inline-block bg-sky-600 hover:bg-sky-700 text-white font-bold py-3 px-8 rounded-full shadow-lg transition-all duration-300 transform hover:scale-105 animate-slideInUp" style="animation-delay: 0.6s;">
+
+                    Learn More <i class="fas fa-arrow-down ml-2"></i>
+
+                </a>
+
             </section>
 
-            <!-- About Me Section -->
-            <section id="about-section" class="mb-16 bg-gray-800 p-10 rounded-2xl shadow-xl animate-scale-in border border-sky-600/20 relative overflow-hidden">
-                <div class="absolute inset-0 grid-pattern z-0 opacity-10"></div>
-                <h2 class="text-5xl font-bold text-sky-400 mb-8 text-center border-b-4 border-sky-600 pb-4 relative z-10">
-                    <i class="fas fa-user-secret mr-4 text-4xl"></i> About Me
+
+
+            <section id="about" class="my-16 bg-slate-800 p-8 md:p-12 rounded-2xl shadow-2xl animate-popIn">
+
+                <h2 class="text-4xl font-bold text-sky-400 text-center mb-8 border-b-2 border-sky-600 pb-4">
+
+                    <i class="fas fa-user-secret mr-3"></i> About Me
+
                 </h2>
-                <div class="flex flex-col md:flex-row items-center md:space-x-12 relative z-10">
-                    <div class="md:w-1/3 mb-10 md:mb-0 flex-shrink-0">
-                        <img
-                            src="https://placehold.co/400x400/1F2937/6B7280?text=M.A.B.A" <!-- Darker placeholder colors -->
-                            alt="Mohamed Amine Ben Aoun"
-                            class="rounded-full shadow-2xl border-6 border-sky-500 mx-auto w-64 h-64 object-cover ring-4 ring-sky-700/50 transform transition-transform duration-500 hover:scale-105"
-                        />
+
+                <div class="flex flex-col md:flex-row items-center md:space-x-12">
+
+                    <div class="md:w-1/3 mb-8 md:mb-0">
+
+                        <img src="../imgs/robobird/toji.png" alt="Mohamed Amine Ben Aoun" class="rounded-full shadow-lg border-4 border-sky-500 mx-auto w-64 h-64 object-cover">
+
                     </div>
-                    <div class="md:w-2/3 text-xl text-gray-300 leading-relaxed text-justify">
-                        <p class="mb-6">
-                            Hello! I'm Mohamed Amine Ben Aoun — a dedicated cybersecurity student with a strong passion for <span class="font-semibold text-sky-300 code-highlight">binary exploitation</span> and <span class="font-semibold text-sky-300 code-highlight">reverse engineering</span>.
+
+                    <div class="md:w-2/3 text-lg text-gray-300 leading-relaxed">
+
+                        <p class="mb-4">
+
+                            Hello! I am Mohamed Amine Ben Aoun, though I also go by Damino. I’m a passionate and dedicated Cybersecurity Engineering student with a strong interest in ethical hacking, system security, and network defense.
+
+
+
+My journey began with a deep fascination for how systems work at their core and a curiosity about the vulnerabilities that could compromise them. Over time, that curiosity grew into a commitment to understanding and securing digital infrastructures. I enjoy learning by building, breaking, and defending, and I’m constantly exploring new tools, frameworks, and real-world scenarios to sharpen my skills.
+
                         </p>
-                        <p class="mb-6">
-                            I actively challenge myself through <span class="font-semibold text-sky-300 code-highlight">Capture The Flag (CTF) competitions</span>, where I focus on low-level vulnerabilities, memory corruption, and deep system behavior analysis. My journey combines academic learning with hands-on exploration of offensive security techniques, always driven by curiosity and a desire to understand how things work beneath the surface.
-                        </p>
-                        <p>
-                            Whether dissecting binaries or uncovering subtle logic flaws, I thrive on solving complex problems and pushing the limits of my technical skills.
-                        </p>
+
                     </div>
+
                 </div>
+
             </section>
 
-            <!-- Skills Section (Redesigned) -->
-            <section id="skills-section" class="mb-16 bg-gray-800 p-10 rounded-2xl shadow-xl animate-scale-in border border-sky-600/20 relative overflow-hidden">
-                <!-- Removed the grid-pattern from this specific section -->
-                <h2 class="text-5xl font-bold text-sky-400 mb-8 text-center border-b-4 border-sky-600 pb-4 relative z-10">
-                    <i class="fas fa-microchip mr-4 text-4xl"></i> My Skills
+            
+
+            <section id="skills" class="my-16 bg-slate-800 p-8 md:p-12 rounded-2xl shadow-2xl animate-popIn">
+
+                <h2 class="text-4xl font-bold text-sky-400 text-center mb-8 border-b-2 border-sky-600 pb-4">
+
+                    <i class="fas fa-microchip mr-3"></i> My Expertise
+
                 </h2>
-                <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4 text-center relative z-10">
-                    <!-- Updated Skill Card Design -->
-                    <div class="group relative bg-slate-700 hover:bg-sky-700 text-sky-200 py-4 px-6 rounded-lg font-medium text-lg shadow-md transition-all duration-300 transform hover:-translate-y-2 hover:scale-105 cursor-pointer flex items-center justify-center border-b-4 border-slate-600 group-hover:border-sky-500">
-                        Binary Exploitation
+
+                <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-6 text-center">
+
+                    <div class="bg-slate-700 p-6 rounded-lg shadow-md transition-transform hover:scale-105 hover:bg-sky-700">
+
+                        <p class="font-bold text-lg text-sky-200">Binary Exploitation</p>
+
                     </div>
-                    <div class="group relative bg-slate-700 hover:bg-sky-700 text-sky-200 py-4 px-6 rounded-lg font-medium text-lg shadow-md transition-all duration-300 transform hover:-translate-y-2 hover:scale-105 cursor-pointer flex items-center justify-center border-b-4 border-slate-600 group-hover:border-sky-500">
-                        Reverse Engineering
+
+                    <div class="bg-slate-700 p-6 rounded-lg shadow-md transition-transform hover:scale-105 hover:bg-sky-700">
+
+                        <p class="font-bold text-lg text-sky-200">Reverse Engineering</p>
+
                     </div>
-                    <div class="group relative bg-slate-700 hover:bg-sky-700 text-sky-200 py-4 px-6 rounded-lg font-medium text-lg shadow-md transition-all duration-300 transform hover:-translate-y-2 hover:scale-105 cursor-pointer flex items-center justify-center border-b-4 border-slate-600 group-hover:border-sky-500">
-                        CTF Challenges
+
+                    <div class="bg-slate-700 p-6 rounded-lg shadow-md transition-transform hover:scale-105 hover:bg-sky-700">
+
+                        <p class="font-bold text-lg text-sky-200">Penetration Testing</p>
+
                     </div>
-                    <div class="group relative bg-slate-700 hover:bg-sky-700 text-sky-200 py-4 px-6 rounded-lg font-medium text-lg shadow-md transition-all duration-300 transform hover:-translate-y-2 hover:scale-105 cursor-pointer flex items-center justify-center border-b-4 border-slate-600 group-hover:border-sky-500">
-                        Memory Corruption
+
+                    <div class="bg-slate-700 p-6 rounded-lg shadow-md transition-transform hover:scale-105 hover:bg-sky-700">
+
+                        <p class="font-bold text-lg text-sky-200">Infrastructure Security</p>
+
                     </div>
-                    <div class="group relative bg-slate-700 hover:bg-sky-700 text-sky-200 py-4 px-6 rounded-lg font-medium text-lg shadow-md transition-all duration-300 transform hover:-translate-y-2 hover:scale-105 cursor-pointer flex items-center justify-center border-b-4 border-slate-600 group-hover:border-sky-500">
-                        Low-Level Vulnerabilities
-                    </div>
-                    <div class="group relative bg-slate-700 hover:bg-sky-700 text-sky-200 py-4 px-6 rounded-lg font-medium text-lg shadow-md transition-all duration-300 transform hover:-translate-y-2 hover:scale-105 cursor-pointer flex items-center justify-center border-b-4 border-slate-600 group-hover:border-sky-500">
-                        Offensive Security
-                    </div>
-                    <div class="group relative bg-slate-700 hover:bg-sky-700 text-sky-200 py-4 px-6 rounded-lg font-medium text-lg shadow-md transition-all duration-300 transform hover:-translate-y-2 hover:scale-105 cursor-pointer flex items-center justify-center border-b-4 border-slate-600 group-hover:border-sky-500">
-                        System Analysis
-                    </div>
-                    <div class="group relative bg-slate-700 hover:bg-sky-700 text-sky-200 py-4 px-6 rounded-lg font-medium text-lg shadow-md transition-all duration-300 transform hover:-translate-y-2 hover:scale-105 cursor-pointer flex items-center justify-center border-b-4 border-slate-600 group-hover:border-sky-500">
-                        Linux
-                    </div>
-                    <div class="group relative bg-slate-700 hover:bg-sky-700 text-sky-200 py-4 px-6 rounded-lg font-medium text-lg shadow-md transition-all duration-300 transform hover:-translate-y-2 hover:scale-105 cursor-pointer flex items-center justify-center border-b-4 border-slate-600 group-hover:border-sky-500">
-                        Python
-                    </div>
-                    <div class="group relative bg-slate-700 hover:bg-sky-700 text-sky-200 py-4 px-6 rounded-lg font-medium text-lg shadow-md transition-all duration-300 transform hover:-translate-y-2 hover:scale-105 cursor-pointer flex items-center justify-center border-b-4 border-slate-600 group-hover:border-sky-500">
-                        C/C++
-                    </div>
-                    <div class="group relative bg-slate-700 hover:bg-sky-700 text-sky-200 py-4 px-6 rounded-lg font-medium text-lg shadow-md transition-all duration-300 transform hover:-translate-y-2 hover:scale-105 cursor-pointer flex items-center justify-center border-b-4 border-slate-600 group-hover:border-sky-500">
-                        Vulnerability Research
-                    </div>
-                    <div class="group relative bg-slate-700 hover:bg-sky-700 text-sky-200 py-4 px-6 rounded-lg font-medium text-lg shadow-md transition-all duration-300 transform hover:-translate-y-2 hover:scale-105 cursor-pointer flex items-center justify-center border-b-4 border-slate-600 group-hover:border-sky-500">
-                        Exploit Development
-                    </div>
-                    <div class="group relative bg-slate-700 hover:bg-sky-700 text-sky-200 py-4 px-6 rounded-lg font-medium text-lg shadow-md transition-all duration-300 transform hover:-translate-y-2 hover:scale-105 cursor-pointer flex items-center justify-center border-b-4 border-slate-600 group-hover:border-sky-500">
-                        SOC Blue Team
-                    </div>
-                    <div class="group relative bg-slate-700 hover:bg-sky-700 text-sky-200 py-4 px-6 rounded-lg font-medium text-lg shadow-md transition-all duration-300 transform hover:-translate-y-2 hover:scale-105 cursor-pointer flex items-center justify-center border-b-4 border-slate-600 group-hover:border-sky-500">
-                        Network Infrastructure Config
-                    </div>
+
                 </div>
+
             </section>
 
-            <!-- Posts Section -->
-            <section id="posts-section" class="home mb-16 bg-gray-800 p-10 rounded-2xl shadow-xl animate-scale-in border border-sky-600/20 relative overflow-hidden">
+
+
+            <section id="categories" class="my-16 bg-slate-800 p-8 md:p-12 rounded-2xl shadow-2xl animate-popIn">
+
+                <h2 class="text-4xl font-bold text-sky-400 text-center mb-8 border-b-2 border-sky-600 pb-4">
+
+                    <i class="fas fa-tags mr-3"></i> Categories
+
+                </h2>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+
+                    <div class="bg-slate-700 p-8 rounded-lg shadow-md transition-transform hover:scale-[1.02] hover:bg-sky-700">
+
+                        <h3 class="text-2xl font-bold text-sky-200 mb-2">CTF Write-Ups</h3>
+
+                        <p class="text-gray-400 mb-4">Detailed solutions and explanations for Capture The Flag challenges, focusing on binary exploitation, reverse engineering, and more.</p>
+
+                        <a href="#" class="text-sky-400 hover:text-sky-200 font-semibold transition-colors">
+
+                            Explore CTFs <i class="fas fa-arrow-right ml-2"></i>
+
+                        </a>
+
+                    </div>
+
+                    <div class="bg-slate-700 p-8 rounded-lg shadow-md transition-transform hover:scale-[1.02] hover:bg-sky-700">
+
+                        <h3 class="text-2xl font-bold text-sky-200 mb-2">My Projects</h3>
+
+                        <p class="text-gray-400 mb-4">A collection of personal security tools, proof-of-concepts, and development projects I've worked on.</p>
+
+                        <a href="#" class="text-sky-400 hover:text-sky-200 font-semibold transition-colors">
+
+                            View Projects <i class="fas fa-arrow-right ml-2"></i>
+
+                        </a>
+
+                    </div>
+
+                    <div class="bg-slate-700 p-8 rounded-lg shadow-md transition-transform hover:scale-[1.02] hover:bg-sky-700">
+
+                        <h3 class="text-2xl font-bold text-sky-200 mb-2">Certifications & Reviews</h3>
+
+                        <p class="text-gray-400 mb-4">Reviews of my certification journey, including study materials, exam experiences, and insights into specific security certifications.</p>
+
+                        <a href="#" class="text-sky-400 hover:text-sky-200 font-semibold transition-colors">
+
+                            Read Reviews <i class="fas fa-arrow-right ml-2"></i>
+
+                        </a>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+
+
+   <section id="posts-section" class="home mb-16 bg-gray-800 p-10 rounded-2xl shadow-xl animate-scale-in border border-sky-600/20 relative overflow-hidden">
                 <div class="absolute inset-0 grid-pattern z-0 opacity-10"></div>
                 <h2 class="post-list-heading text-5xl font-bold text-sky-400 mb-8 text-center border-b-4 border-sky-600 pb-4 relative z-10">
-                    <i class="fas fa-file-code mr-4 text-4xl"></i> Recent Posts
+                    <i class="fas fa-file-code mr-4 text-4xl"></i>Posts
                 </h2>
                 <ul class="post-list space-y-8 relative z-10">
                     {% for post in site.posts limit:5 %}
@@ -295,122 +340,97 @@
                     {% endfor %}
                 </ul>
 
-                <p class="rss-subscribe text-center mt-12 text-gray-400">
-                    Stay updated: <a href="/feed.xml" class="text-sky-400 hover:underline hover:text-sky-200 transition-colors duration-300 font-semibold flex items-center justify-center"><i class="fas fa-rss-square mr-2"></i> Subscribe via RSS</a>
-                </p>
             </section>
         </div>
+
     </main>
 
-    <!-- Footer Section -->
-    <footer id="contact-section" class="site-footer h-card bg-gray-950 text-white py-12 shadow-inner border-t border-gray-800">
-        <div class="container mx-auto px-6">
-            <h2 class="footer-heading text-4xl font-bold mb-8 text-center text-sky-300">
-                <i class="fas fa-hands-helping mr-4 text-3xl"></i> Connect with Mohamed Amine
-            </h2>
 
-            <div class="flex flex-col md:flex-row justify-between items-center text-center md:text-left space-y-8 md:space-y-0">
-                <div class="footer-col md:w-1/3">
-                    <ul class="contact-list text-gray-400 space-y-2">
-                        <li class="text-xl font-semibold mb-2 text-sky-200">Mohamed Amine Ben Aoun</li>
-                        <li>
-                            <a class="text-sky-400 hover:text-sky-200 hover:underline transition-colors duration-300 flex items-center justify-center md:justify-start" href="mailto:Damino.ben.aoun@gmail.com">
-                                <i class="fas fa-envelope mr-2"></i>
-                                Damino.ben.aoun@gmail.com
-                            </a>
-                        </li>
-                    </ul>
-                </div>
 
-                <div class="footer-col md:w-1/3 flex justify-center">
-                    <ul class="social-media-list flex space-x-6">
-                        <li>
-                            <a href="https://github.com/Daminoo123" class="text-sky-400 hover:text-sky-200 transition-colors duration-300 transform hover:scale-110" aria-label="GitHub Profile">
-                                <i class="fab fa-github w-9 h-9 text-4xl"></i>
-                                <span class="sr-only">GitHub</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="https://www.linkedin.com/in/ben-aoun-mohamed-amine-35bb8621b/" class="text-sky-400 hover:text-sky-200 transition-colors duration-300 transform hover:scale-110" aria-label="LinkedIn Profile">
-                                <i class="fab fa-linkedin w-9 h-9 text-4xl"></i>
-                                <span class="sr-only">LinkedIn</span>
-                            </a>
-                        </li>
-                    </ul>
-                </div>
+    <footer id="contact" class="bg-slate-950 text-gray-400 py-12 text-center">
 
-                <div class="footer-col md:w-1/3 text-gray-400 text-sm md:text-right">
-                    <p class="font-medium text-sky-200 mb-2">Cybersecurity made easy</p>
-                    <p>&copy; <script>document.write(new Date().getFullYear())</script> Mohamed Amine Ben Aoun. All rights reserved.</p>
-                </div>
+        <div class="container mx-auto px-4">
+
+            <h2 class="text-3xl font-bold text-sky-300 mb-4">Get In Touch</h2>
+
+            <div class="flex justify-center space-x-6 mb-6">
+
+                <a href="mailto:Damino.ben.aoun@gmail.com" class="text-sky-400 hover:text-sky-200 transition-colors" aria-label="Email">
+
+                    <i class="fas fa-envelope text-3xl"></i>
+
+                </a>
+
+                <a href="https://github.com/Daminoo123" class="text-sky-400 hover:text-sky-200 transition-colors" aria-label="GitHub">
+
+                    <i class="fab fa-github text-3xl"></i>
+
+                </a>
+
+                <a href="https://www.linkedin.com/in/mohamed-amine-ben-aoun-35bb8621b/" class="text-sky-400 hover:text-sky-200 transition-colors" aria-label="LinkedIn">
+
+                    <i class="fab fa-linkedin text-3xl"></i>
+
+                </a>
+
             </div>
+
+            <p>&copy; <span id="current-year"></span> Mohamed Amine Ben Aoun. All rights reserved.</p>
+
         </div>
+
     </footer>
 
+
+
     <script>
-        // JavaScript for mobile navigation toggle
-        document.addEventListener('DOMContentLoaded', () => {
-            const navTrigger = document.getElementById('nav-trigger');
-            const siteNav = document.getElementById('site-nav');
-            const navLinks = siteNav.querySelectorAll('.nav-link');
 
-            // Function to close navigation
-            const closeNav = () => {
-                navTrigger.checked = false;
-                siteNav.classList.add('hidden');
-                siteNav.classList.remove('block');
-            };
+        // Smooth scrolling for navigation links
 
-            navTrigger.addEventListener('change', () => {
-                if (navTrigger.checked) {
-                    siteNav.classList.remove('hidden');
-                    siteNav.classList.add('block');
-                } else {
-                    siteNav.classList.add('hidden');
-                    siteNav.classList.remove('block');
-                }
-            });
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
 
-            // Close nav when a link is clicked (for mobile)
-            navLinks.forEach(link => {
-                link.addEventListener('click', closeNav);
-            });
+            anchor.addEventListener('click', function (e) {
 
-            // Handle window resize to reset nav state for larger screens
-            window.addEventListener('resize', () => {
-                if (window.innerWidth >= 1024) { // Tailwind's 'lg' breakpoint
-                    closeNav();
-                    siteNav.classList.remove('hidden'); // Ensure it's visible on desktop
-                    siteNav.classList.remove('block');
-                }
-            });
+                e.preventDefault();
 
-            // Intersection Observer for scroll animations
-            const observerOptions = {
-                root: null,
-                rootMargin: '0px',
-                threshold: 0.1
-            };
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
 
-            const animateOnScroll = (entries, observer) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        entry.target.classList.add('animate-scale-in'); /* Use the new animation */
-                        observer.unobserve(entry.target);
-                    }
+                    behavior: 'smooth'
+
                 });
-            };
 
-            // Apply observer to main content sections
-            const sectionsToAnimate = document.querySelectorAll('#about-section, #skills-section, #posts-section');
-            const observer = new IntersectionObserver(animateOnScroll, observerOptions);
-
-            sectionsToAnimate.forEach(section => {
-                // Ensure sections are hidden initially if they are off-screen
-                section.style.opacity = '0';
-                observer.observe(section);
             });
+
         });
+
+
+
+        // Update copyright year
+
+        document.getElementById('current-year').textContent = new Date().getFullYear();
+
+
+
+        // Mobile navigation toggle
+
+        const navTrigger = document.getElementById('nav-trigger');
+
+        const siteNav = document.getElementById('site-nav');
+
+        const navLinks = siteNav.querySelectorAll('.nav-link');
+
+        navLinks.forEach(link => {
+
+            link.addEventListener('click', () => {
+
+                navTrigger.checked = false;
+
+            });
+
+        });
+
     </script>
+
 </body>
+
 </html>

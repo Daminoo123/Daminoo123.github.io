@@ -20,13 +20,9 @@ The binary is a standard 64-bit Linux executable and is not stripped, meaning sy
 ```bash
 $ file r0bob1rd
 r0bob1rd: ELF 64-bit LSB executable, x86-64, ... dynamically linked, ... not stripped
-Security Mitigations
 
 A review of the security flags reveals our potential attack surface.
 
-bash
-Copier
-Modifier
 $ checksec --file=r0bob1rd
 RELRO           STACK CANARY      NX            PIE             RPATH      RUNPATH      Symbols         FORTIFY Fortified Fortifiable FILE
 Partial RELRO   Canary found      NX enabled    No PIE          No RPATH   RW-RUNPATH   83 Symbols      No      0         2             r0bob1rd
