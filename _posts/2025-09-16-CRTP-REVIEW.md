@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "My CRTP Journey – Insights & Experience 🚀"
+title: "My CRTP Journey – Insights & Experience"
 date: 2025-06-16 14:45:00 -0500
 permalink: /certifications/2025/06/16/CRTP-REVIEW/
 ---
