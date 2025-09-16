@@ -2,7 +2,6 @@
 layout: post
 title: "My CRTP Journey – Insights & Experience 🚀"
 date: 2025-06-16 14:45:00 -0500
-categories: Certifications
 permalink: /certifications/2025/06/16/CRTP-REVIEW/
 ---
 
@@ -51,7 +50,7 @@ A full report must be submitted within 48 hours after finishing the lab. This re
 
 During the exam, I encountered a few challenges:
 
-- I managed to **escalate privileges on the local machine** and **compromise the first three machines** in about 2.5 hours.  
+- I managed to **escalate privileges on 3 local machines** and **compromise the first three machines** in about 2.5 hours.  
 - Pivoting from the third machine to the fourth initially slowed me down. I had assumed that the **only tools I need to use were from the `tools.zip` folder**, even though the attack path was clearly visible with an other tool.  
 - Some tools from the zip folder, like **Rubeus**, were behaving unexpectedly. To resolve this, I **downloaded the latest versions from GitHub**, which allowed me to successfully continue the attack chain.
 
