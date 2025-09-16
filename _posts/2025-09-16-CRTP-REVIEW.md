@@ -3,6 +3,7 @@ layout: post
 title: "My CRTP Journey – Insights & Experience 🚀"
 date: 2025-06-16 14:45:00 -0500
 categories: [Certifications]
+permalink: /certifications/2025/06/16/CRTP-REVIEW/
 ---
 
 Hi, I’m **Mohamed Amine Ben Aoun** a Network infrastructure and data security engineering student at ESPRIT.  
